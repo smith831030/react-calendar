@@ -1,15 +1,11 @@
 import React from 'react';
 
 export default class CalendarControl extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     Prev(){
         var year=this.props.year;
         var month=this.props.month;
         var prev_year, prev_month;
-        if(month==1){
+        if(month===1){
           prev_year=year-1;
           prev_month=12;
         }else{
@@ -24,7 +20,7 @@ export default class CalendarControl extends React.Component{
         var year=this.props.year;
         var month=this.props.month;
         var prev_year, prev_month;
-        if(month==12){
+        if(month===12){
           prev_year=year+1;
           prev_month=1;
         }else{

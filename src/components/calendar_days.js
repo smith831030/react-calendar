@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default class CalendarDays extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     toggleInput(year, month, day){
         this.props.onClick(year, month, day);
     }
@@ -25,27 +21,36 @@ export default class CalendarDays extends React.Component{
         var lastday = last_date.getDate();
         var lastday_of_week = last_date.getDay();
 
-        var output = [];
-        var today_class='';
+        var prev_days = [], next_days = [];
         for (var ld=(last_day_of_last_month-firstday_of_week+1); ld<=last_day_of_last_month; ld++){
-            var key='ld_'+ld.toString();
-          output.push(<div key={key} className="section_day last_next_day">{ld}</div>);
-        }
-        var days=Array.apply(null, Array(lastday)).map(function (x, i) { return i+1; })
-        days.map((d)=>(
-            output.push(<div key={d} className={(this.props.year==this_year && this.props.month==this_month && d==this_day)?'section_day section_day_day today':'section_day section_day_day'} onClick={()=>this.toggleInput(this_year, this_month, d)}>{d}</div>)
-        ));
-        /*
-        for (var d = 1; d <= lastday; d++) {
-          today_class=(this.props.year==this_year && this.props.month==this_month && d==this_day)?'section_day section_day_day today':'section_day section_day_day';
-          output.push(<div key={d} className={today_class} onClick={()=>this.toggleInput(this_year, this_month, d)}>{d}</div>);
-        }
-        */
-        for (var nd=1; nd<(7-lastday_of_week); nd++){
-            var key='nd_'+nd.toString();
-          output.push(<div key={key} className="section_day last_next_day">{nd}</div>);
+            prev_days.push(<div key={'ld_'+ld.toString()} className="section_day last_next_day">{ld}</div>);
         }
 
-        return (<div>{output}</div>);
+        var days=Array.apply(null, Array(lastday)).map(function (x, i) {
+            return i+1;
+        });
+
+        for (var nd=1; nd<(7-lastday_of_week); nd++){
+            next_days.push(<div key={'nd_'+nd.toString()} className="section_day last_next_day">{nd}</div>);
+        }
+
+        return (<div>
+                {prev_days}
+                {days.map((d)=>{
+                    return (<div
+                        key={d}
+                        className={(this.props.year===this_year && this.props.month===this_month && d===this_day)?'section_day section_day_day today':'section_day section_day_day'}
+                        onClick={()=>this.toggleInput(this.props.year, this.props.month, d)}>
+                            <strong>{d}</strong>
+                            <br />
+                            <p>{this.props.data_days.map((val)=>{
+                                if(val.date===this.props.year.toString()+this.props.month.toString()+d.toString()){
+                                    return val.memo;
+                                }
+                            })}</p>
+                    </div>);
+                })}
+                {next_days}
+                </div>);
     }
 }
