@@ -15,7 +15,7 @@ export default class Calendar extends React.Component{
         var year=today.getFullYear();
         var month=today.getMonth()+1;
 
-        this.state = {year:year, month:month, data_days:[{'date':'201759', 'memo':'test'}, {'date':'2017520', 'memo':'test3'}]};
+        this.state = {year:year, month:month, data_days:[]};
     }
 
     changeDate(year, month){
@@ -35,6 +35,12 @@ export default class Calendar extends React.Component{
         document.getElementById('calendar-input').className=newClass;
     }
 
+    addNewMemo(newItem){
+        this.setState((prevState)=>({
+            data_days:prevState.data_days.concat(newItem),
+        }));
+    }
+
     render(){
         return(<div>
     	        <h2>Calendar</h2>
@@ -42,7 +48,7 @@ export default class Calendar extends React.Component{
             	<CalendarControl onChange={this.changeDate.bind(this)} year={this.state.year} month={this.state.month} />
             	<CalendarTitle />
             	<CalendarDays year={this.state.year} month={this.state.month} data_days={this.state.data_days} onClick={this.toggleInput.bind(this)} />
-                <CalendarInput year={this.state.input_y} month={this.state.input_m} day={this.state.input_d} />
+                <CalendarInput year={this.state.input_y} month={this.state.input_m} day={this.state.input_d} onSubmit={this.addNewMemo.bind(this)} />
             </div>);
     }
 }

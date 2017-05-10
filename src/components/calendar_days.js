@@ -43,11 +43,11 @@ export default class CalendarDays extends React.Component{
                         onClick={()=>this.toggleInput(this.props.year, this.props.month, d)}>
                             <strong>{d}</strong>
                             <br />
-                            <p>{this.props.data_days.map((val)=>{
+                            <ul>{this.props.data_days.map((val)=>{
                                 if(val.date===this.props.year.toString()+this.props.month.toString()+d.toString()){
-                                    return val.memo;
+                                    return <li>{val.memo}</li>;
                                 }
-                            })}</p>
+                            })}</ul>
                     </div>);
                 })}
                 {next_days}

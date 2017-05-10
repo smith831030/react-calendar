@@ -3,7 +3,7 @@ import React from 'react';
 export default class CalendarInput extends React.Component{
     constructor(props){
         super(props);
-        this.state = {items:[], text:''};
+        this.state = {text:''};
         this.handleChange=this.handleChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
     }
@@ -24,10 +24,15 @@ export default class CalendarInput extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        var newItem={text:this.state.text};
-        this.setState((prevState)=>({
-            items:prevState.items.concat(newItem),
-            text:''
-        }));
+        var newItem={
+                    'date':this.props.year.toString()+this.props.month.toString()+this.props.day.toString(),
+                    'memo':this.state.text
+                    }
+        this.props.onSubmit(newItem);
+        this.setState({text:''});
+        // this.setState((prevState)=>({
+        //     items:prevState.items.concat(newItem),
+        //     text:''
+        // }));
     }
 }

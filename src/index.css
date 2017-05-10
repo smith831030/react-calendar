@@ -1,8 +1,8 @@
-.section_day {width:14.25%; float:left; display:block; min-height:90px; }
+.section_day {width:14.25%; float:left; display:block; height:90px; max-height:90px; overflow:auto; }
 .section_day_title {text-align:center; font-weight:bold; }
 .section_day_day {border:1px solid #ccc; margin:-1px; }
 .last_next_day {background-color:#efefef; color:#ccc;}
-.today {background-color:#efefef; border:1px solid #000; margin:-1px; min-height:88px;}
+.today {background-color:#efefef; border:1px solid #000; margin:-1px; height:88px; max-height:88px; }
 
 .display-hidden {display:none;}
 .display-block {display:block;}
