@@ -21,25 +21,19 @@ export default class CalendarDays extends React.Component{
         var lastday = last_date.getDate();
         var lastday_of_week = last_date.getDay();
 
-        var prev_days = [], next_days = [];
-        for (var ld=(last_day_of_last_month-firstday_of_week+1); ld<=last_day_of_last_month; ld++){
-            prev_days.push(<div key={'ld_'+ld.toString()} className="section_day last_next_day">{ld}</div>);
-        }
-
-        var days=Array.apply(null, Array(lastday)).map(function (x, i) {
-            return i+1;
-        });
-
-        for (var nd=1; nd<(7-lastday_of_week); nd++){
-            next_days.push(<div key={'nd_'+nd.toString()} className="section_day last_next_day">{nd}</div>);
-        }
+        var prev_days = Array.from({length:firstday_of_week}, (v,k) => last_day_of_last_month - firstday_of_week + k + 1);
+        var next_days = Array.from({length:6-lastday_of_week}, (v,k) => k+1);
+        var days = Array.from({length:lastday}, (v,k) => k+1);
 
         return (<div>
-                {prev_days}
+                {prev_days.map((ld)=>{
+                    return <div key={ld} className="section_day last_next_day">{ld}</div>;
+                })}
                 {days.map((d)=>{
+                    var today=(this.props.year===this_year && this.props.month===this_month && d===this_day)?'today':'';
                     return (<div
                         key={d}
-                        className={(this.props.year===this_year && this.props.month===this_month && d===this_day)?'section_day section_day_day today':'section_day section_day_day'}
+                        className={'section_day section_day_day '+today}
                         onClick={()=>this.toggleInput(this.props.year, this.props.month, d)}>
                             <strong>{d}</strong>
                             <br />
@@ -50,7 +44,9 @@ export default class CalendarDays extends React.Component{
                             })}</ul>
                     </div>);
                 })}
-                {next_days}
+                {next_days.map((nd)=>{
+                    return <div key={nd} className="section_day last_next_day">{nd}</div>;
+                })}
                 </div>);
     }
 }

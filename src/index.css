@@ -4,5 +4,15 @@
 .last_next_day {background-color:#efefef; color:#ccc;}
 .today {background-color:#efefef; border:1px solid #000; margin:-1px; height:88px; max-height:88px; }
 
+#calendar-input {
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    top: 50%;
+    height: 100px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin-left: -150px;
+}
 .display-hidden {display:none;}
 .display-block {display:block;}

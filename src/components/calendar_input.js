@@ -8,12 +8,18 @@ export default class CalendarInput extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
+    handleClose(){
+        document.getElementById('calendar-input').className='display-hidden';
+        return false;
+    }
+
     render(){
         return (<div id="calendar-input" className="display-hidden">
             <p>{this.props.year}/{this.props.month}/{this.props.day}</p>
             <form onSubmit={this.handleSubmit}>
                 <textarea onChange={this.handleChange} value={this.state.text}></textarea>
                 <button>Add</button>
+                <a onClick={this.handleClose}>Close</a>
             </form>
         </div>);
     }
