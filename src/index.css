@@ -2,7 +2,7 @@
 .section_day_title {text-align:center; font-weight:bold; }
 .section_day_day {border:1px solid #ccc; margin:-1px; }
 .last_next_day {background-color:#efefef; color:#ccc;}
-.today {background-color:#efefef; border:1px solid #000; margin:-1px; height:88px; max-height:88px; }
+.today {background-color:#efefef; border:1px solid #000; margin:-1px; height:90px; max-height:90px; }
 
 #calendar-input {
     position: absolute;

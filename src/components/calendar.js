@@ -25,20 +25,20 @@ export default class Calendar extends React.Component{
         });
     }
 
-    toggleInput(input_y, input_m, input_d){
+    showInput(input_y, input_m, input_d){
         this.setState({
             input_y:input_y,
             input_m:input_m,
             input_d:input_d
         });
-        var newClass=(document.getElementById('calendar-input').className==='display-block')?'display-hidden':'display-block';
-        document.getElementById('calendar-input').className=newClass;
+        document.getElementById('calendar-input').className='display-block';
     }
 
     addNewMemo(newItem){
         this.setState((prevState)=>({
             data_days:prevState.data_days.concat(newItem),
         }));
+        document.getElementById('calendar-input').className='display-hidden';
     }
 
     render(){
@@ -47,7 +47,7 @@ export default class Calendar extends React.Component{
                 <h3>{this.state.year} / {this.state.month}</h3>
             	<CalendarControl onChange={this.changeDate.bind(this)} year={this.state.year} month={this.state.month} />
             	<CalendarTitle />
-            	<CalendarDays year={this.state.year} month={this.state.month} data_days={this.state.data_days} onClick={this.toggleInput.bind(this)} />
+            	<CalendarDays year={this.state.year} month={this.state.month} data_days={this.state.data_days} onClick={this.showInput.bind(this)} />
                 <CalendarInput year={this.state.input_y} month={this.state.input_m} day={this.state.input_d} onSubmit={this.addNewMemo.bind(this)} />
             </div>);
     }
